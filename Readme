@@ -16,5 +16,7 @@ with the line
 
 return (str(self.idx) + "-" + str(self.depth))
 
+The tool was tested on DNA sequences (fasta format). As a prepration process for the input data, remove headers and newlines from the fasta file. 
+
 
 
