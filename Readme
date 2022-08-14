@@ -1,11 +1,11 @@
 
 -------------------------------------------------------------------------------- Prerequisite ---------------------------------------------------------------------------
-Install the following library
+Install the following library that will be used to build suffix trees:
 https://github.com/ptrus/suffix-trees 
 
-Then edit ./suffix_trees/STree.py as the following:
+Then edit ./suffix_trees/STree.py as the followings:
 
-- comment the following line, line 249, by appending "#" at the beginning of the line. This will allow setting attributes more freely.
+- comment the following line, line 249, by appending "#" at the beginning of the line. This will allow setting attributes to the suffix tree more freely.
 __slots__ = ['_suffix_link', 'transition_links', 'idx', 'depth', 'parent', 'generalized_idxs']
 
 - In some procedure, we hashed suffix tree internal nodes, so we used only the combination of node index and node depth to identify uniqually the node instaed of the original long identifcation 
@@ -14,9 +14,7 @@ of the nodes given by the library. Shorter ideintifcation will use less space an
 
 return ("SNode: idx:" + str(self.idx) + " depth:" + str(self.depth) +
                 " transitons:" + str(list(self.transition_links.keys())))
-
 with the line 
-
 return (str(self.idx) + "-" + str(self.depth))
 
 
