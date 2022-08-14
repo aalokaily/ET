@@ -1,3 +1,4 @@
 
-removing the Snode \_\_slots\_\_ line to allow setting attributes more freely.
-kkkkkkkkk
+comment the following line by appending "#" at the beginning of the line. This will allow setting attributes more freely.
+Snode __slots__ line 
+
