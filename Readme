@@ -1,4 +1,5 @@
 
+-------------------------------------------------------------------------------- Prerequisite ---------------------------------------------------------------------------
 Install the following library
 https://github.com/ptrus/suffix-trees 
 
@@ -18,7 +19,8 @@ with the line
 
 return (str(self.idx) + "-" + str(self.depth))
 
-Running the tool:
+
+-------------------------------------------------------------------------------- Running the tool-----------------------------------------------------------------------
 The tool was tested on DNA sequences (fasta format). As a prepration process for the input data, remove headers and newlines from the fasta file. 
 
 
