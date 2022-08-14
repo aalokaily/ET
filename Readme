@@ -8,13 +8,12 @@ Then edit ./suffix_trees/STree.py as the followings:
 - comment the following line, line 249, by appending "#" at the beginning of the line. This will allow setting attributes to the suffix tree more freely.
 __slots__ = ['_suffix_link', 'transition_links', 'idx', 'depth', 'parent', 'generalized_idxs']
 
-- In some procedure, we hashed suffix tree internal nodes, so we used only the combination of node index and node depth to identify uniquely an internal node instaed of the original long identifcation 
-of the nodes given by the library. Shorter ideintifcation will use less space and speed up the looku[p process for the hashed nodes. So replace the following two lines in 
-./suffix_trees/STree.py (which are line 264 and 265) 
-
+- In some procedure, we hashed suffix tree internal nodes, so we used only the combination of node index and node depth to identify uniquely an internal node instaed
+of the original identifcation of the nodes given by the library which is a bit long (shorter ideintifcation will use less space and speed up the lookup process for 
+the hashed nodes. So replace the following two lines (which are line 264 and 265) 
 return ("SNode: idx:" + str(self.idx) + " depth:" + str(self.depth) +
                 " transitons:" + str(list(self.transition_links.keys())))
-with the line 
+with the line:
 return (str(self.idx) + "-" + str(self.depth))
 
 
