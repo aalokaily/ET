@@ -1,4 +1,7 @@
 
-comment the following line by appending "#" at the beginning of the line. This will allow setting attributes more freely.
-Snode __slots__ line 
+Install the following library
+https://github.com/ptrus/suffix-trees 
+
+comment the following line, line 249 in ./suffix_trees/STree.py  by appending "#" at the beginning of the line. This will allow setting attributes more freely.
+__slots__ = ['_suffix_link', 'transition_links', 'idx', 'depth', 'parent', 'generalized_idxs']
 
