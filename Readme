@@ -34,11 +34,11 @@ The tool was tested on DNA sequences (fasta format). As a preparation process fo
 Running command:
 python3 {OT_index_script}.py converted_fasta_file k pattern 
 
-OT_index_script can be ET_base_paths.py or ET_base_suffixes.py
+OT_index_script can be ET_using_base_paths.py or ET_using_base_suffixes.py
 k value must be an integer.
 
 As an example:
-python3 {OT_index_script}.py some.fasta 1 AAAAAAAAAAAAA
+python3 ET_using_base_paths.py.py some.fasta 1 AAAAAAAAAAAAA
 
 A sample output:
 Reading input data took 0.00014 seconds
