@@ -28,7 +28,7 @@ return (str(self.idx) + "-" + str(self.depth))
 Firstly, you need to convert the genome in fasta format to a one-line genome which remove any non A, C, G, T, and N (case is sensitive) and headers. This can be done using the script filter_DNA_file_to_4_bases_and_N.py by running the command:
 
 ```python
-python3 filter_DNA_file_to_4_bases_and_N.py $file.fasta 
+python3 Filter_genome_file_to_4_bases_and_N.py $file.fasta > converted_fasta_file.DNA
 ```
 -------------------------------------------------------------------------------- Running the tool -----------------------------------------------------------
 
@@ -36,7 +36,7 @@ The tool was tested on DNA sequences (fasta format). As a preparation process fo
 
 Running command:
 ```python
-python3 {OT_index_script}.py converted_fasta_file k pattern 
+python3 {OT_index_script}.py converted_fasta_file.DNA k pattern 
 ```
 
 - OT_index_script can be ET_using_base_paths.py or ET_using_base_suffixes.py
