@@ -1,4 +1,4 @@
-# ET
+# Error Tree
 The scripts are implementation of error tree algorithms for resolving the approximate matching problem. The full description is available at the preprint https://arxiv.org/pdf/2110.13802.pdf. 
 Generally speaking, Pattern matching is a fundamental process in most scientific domains. The problem involves finding the starting positions of a given pattern (usually of short length) in a reference stream of data (of considerable length) as either exact or approximate (which allows for mismatches, insertions, or deletions) matching. For exact matching, several data structures built in linear time and space can be used in practice nowadays. The solutions proposed so far for approximate matching are non-linear, impractical, or heuristics. With the use of suffix trees and a tree structure derived from suffix trees, we designed and implemented a linear structure ($O(n)$) that resolves the approximate matching problem
 
