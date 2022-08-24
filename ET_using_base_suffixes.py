@@ -99,8 +99,6 @@ def process_leaf_and_internal_nodes(tree):
 	
 def Build_OT_index(tree):
 
-	building_start = time.time()
-	
 	def phase_1_for_OT_indexing_of_base_suffixes(tree):	
 		# find base suffixes
 		stack.append(tree.root)
@@ -402,8 +400,6 @@ def Build_OT_index(tree):
 	key_stack = []
 	tree.OT_index_counter = 0
 
-	setattr(tree, "OT_index", defaultdict())
-		
 	start = time.time()
 	phase_2_for_OT_indexing_of_base_suffixes(tree)
 	print ("\n***** Phase 2 for building OT index using base suffixes finished in", round((time.time() - start), 5), "seconds")
@@ -863,7 +859,9 @@ def start():
 		
 		
 		print ("------------------------------------------------------------------------------------------")	
+		start = time.time()
 		Build_OT_index(tree)
+		print ("Building OT index using base suffixes took", round((time.time() - start), 5), "seconds")
 		
 
 		start = time.time()
