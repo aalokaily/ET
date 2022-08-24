@@ -32,7 +32,9 @@ python filter_DNA_file_to_4_bases_and_N.py $file.fasta
 The tool was tested on DNA sequences (fasta format). As a preparation process for the input data, remove headers and newlines from the fasta file so that all DNA sequence is stored in one line. The input for the tools is the converted fasta file. These tools are applicable for Hamming distance and Wildcards matching. 
 
 Running command:
+```Language
 python3 {OT_index_script}.py converted_fasta_file k pattern 
+```
 
 OT_index_script can be ET_using_base_paths.py or ET_using_base_suffixes.py
 k value must be an integer.
@@ -41,6 +43,7 @@ As an example:
 python3 ET_using_base_paths.py.py some.fasta 1 AAAAAAAAAAAAA
 
 A sample output:
+```bat
 Reading input data took 0.00014 seconds
 ------------------------------------------------------------------------------------------
 Building Suffix Tree took 0.41073 seconds
@@ -86,7 +89,7 @@ Number of position_combinations in the results 11
 Number of expected combinations 13
 All matching results is with a distance equal to 1 as should be
 Found approximate matching for k = 1 in  0.00141 seconds
-
+```
 
 
 For contact, please email AA.12682@KHCC.JO (the email of the first author Anas Al-okaily).
