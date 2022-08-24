@@ -30,7 +30,8 @@ Firstly, you need to convert the genome in fasta format to a one-line genome whi
 ```python
 python filter_DNA_file_to_4_bases_and_N.py $file.fasta 
 ```
--------------------------------------------------------------------------------- Running the tool-----------------------------------------------------------------------
+-------------------------------------------------------------------------------- Running the tool--------------------------------------------------------------------
+
 The tool was tested on DNA sequences (fasta format). As a preparation process for the input data, remove headers and newlines from the fasta file so that all DNA sequence is stored in one line. The input for the tools is the converted fasta file. These tools are applicable for Hamming distance and Wildcards matching. 
 
 Running command:
