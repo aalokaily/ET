@@ -48,7 +48,7 @@ python3 ET_using_base_paths.py.py some.fasta 1 AAAAAAAAAAAAA
 ```
 
 A sample output:
-```bat
+```
 Reading input data took 0.00014 seconds
 ------------------------------------------------------------------------------------------
 Building Suffix Tree took 0.41073 seconds
