@@ -3,7 +3,7 @@ The scripts are implementation of error tree algorithms for resolving the approx
 Generally speaking, Pattern matching is a fundamental process in most scientific domains. The problem involves finding the starting positions of a given pattern (usually of short length) in a reference stream of data (of considerable length) as either exact or approximate (which allows for mismatches, insertions, or deletions) matching. For exact matching, several data structures built in linear time and space can be used in practice nowadays. The solutions proposed so far for approximate matching are non-linear, impractical, or heuristics. With the use of suffix trees and a tree structure derived from suffix trees, we designed and implemented a linear structure ($O(n)$) that resolves the approximate matching problem
 
 
--------------------------------------------------------------------------------- Prerequisite ---------------------------------------------------------------
+-------------------------------------------------------------------------------- Prerequisite ----------------------------------------------------------------
 
 Install the following library that will be used to build suffix trees:
 https://github.com/ptrus/suffix-trees 
@@ -23,14 +23,14 @@ with the line:
 return (str(self.idx) + "-" + str(self.depth))
 
 
--------------------------------------------------------------------------------- Preparation --------------------------------------------------------------------------
+-------------------------------------------------------------------------------- Preparation ----------------------------------------------------------------
 
 Firstly, you need to convert the genome in fasta format to a one-line genome which remove any non A, C, G, T, and N (case is sensitive) and headers. This can be done using the script filter_DNA_file_to_4_bases_and_N.py by running the command:
 
 ```python
 python filter_DNA_file_to_4_bases_and_N.py $file.fasta 
 ```
--------------------------------------------------------------------------------- Running the tool--------------------------------------------------------------------
+-------------------------------------------------------------------------------- Running the tool ----------------------------------------------------------------
 
 The tool was tested on DNA sequences (fasta format). As a preparation process for the input data, remove headers and newlines from the fasta file so that all DNA sequence is stored in one line. The input for the tools is the converted fasta file. These tools are applicable for Hamming distance and Wildcards matching. 
 
