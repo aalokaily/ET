@@ -40,7 +40,7 @@ k value must be an integer.
 As an example:
 python3 {OT_index_script}.py some.fasta 1 AAAAAAAAAAAAA
 
-A sample output are as following:
+A sample output:
 Reading input data took 0.00013 seconds
 ------------------------------------------------------------------------------------------
 Building Suffix Tree took 0.41289 seconds
@@ -85,8 +85,6 @@ Number of position combinations in the results 11
 Number of expected combinations 13
 All matching results is with a distance equal to 1 as should be
 Found approximate matching for k = 1 in  0.00139 seconds
-Reading input data took 0.00014 seconds
-
 
 
 
