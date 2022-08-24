@@ -62,7 +62,7 @@ sum_of_all_OT_indexes 109853
 
 ***** Phase 3 for building OT index for base paths finished in 0.44444 seconds
 ------------------------------------------------------------------------
-Approximate matching:
+Approximate matchings:
 ------------------------------------------------------------------------
 GAAAAAAAAAAAA 1 [0] 158 leaf node
 AGAAAAAAAAAAA 1 [1] 157 leaf node
@@ -80,7 +80,7 @@ AAAAAAAAAACAA 1 [10] 531 leaf node
 AAAAAAAAAAACA 1 [11] 530 leaf node
 AAAAAAAAAAAAT 1 [12] 191 leaf node
 
-Number of matching is 15
+Number of matchings is 15
 Number of position combinations in the results 11
 Number of expected combinations 13
 All matching results is with a distance equal to 1 as should be
