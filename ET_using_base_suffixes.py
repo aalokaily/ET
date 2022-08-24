@@ -861,7 +861,7 @@ def start():
 		print ("------------------------------------------------------------------------------------------")	
 		start = time.time()
 		Build_OT_index(tree)
-		print ("Building OT index using base suffixes took", round((time.time() - start), 5), "seconds")
+		print ("Building OT index using base paths took", round((time.time() - start), 5), "seconds")
 		
 
 		start = time.time()
@@ -880,15 +880,12 @@ def start():
 			tt = find_approximate_matching(tree, pattern, k_value, starting_node, path_of_nodes_for_pattern_from_starting_node, suffixes_traversals)
 			tree.complete_results[k_value] = tt[0]
 			tree.incomplete_results[k_value] = tt[1]
-			#print_results_given_list_of_node(tree, tree.complete_results[k_value] , tree._edgeLabel(starting_node, tree.root) + pattern, pattern_length + starting_node.depth, K)
 		
 		
 		for error_so_far in range (1, K):
 			for res in tree.complete_results[error_so_far]:
 				result_node = res[1]
 				last_mismatch_position = res[0][-1] +  starting_node.depth
-				#print (tree._edgeLabel(result_node, tree.root), "--------")
-				#print (left_K_to_search_for)
 				path_of_nodes = []
 				new_starting_node = result_node.parent
 				while new_starting_node.depth > last_mismatch_position + (1):
@@ -896,25 +893,20 @@ def start():
 					new_starting_node = new_starting_node.parent
 					
 				path_of_nodes = path_of_nodes[::-1]
-				#print (tree._edgeLabel(new_starting_node, tree.root), )	
 				for left_K_to_search_for in range (1, K - error_so_far + 1):
 					tt = find_approximate_matching(tree, pattern[new_starting_node.depth - starting_node.depth:], left_K_to_search_for, new_starting_node, path_of_nodes, suffixes_traversals[new_starting_node.depth - starting_node.depth:])
 					for it in tt[0]:
 						tree.complete_results[error_so_far + left_K_to_search_for].append((res[0] + [x + new_starting_node.depth for x in it[0]], it[1]))
-						#print (tree._edgeLabel(it[1], tree.root)[:9])
 					for it in tt[1]:
 						tree.incomplete_results[error_so_far + left_K_to_search_for].append((res[0] + [x + new_starting_node.depth for x in it[0]], it[1]))
 				
-					#print_results_given_list_of_node(tree, tree.complete_results[error_so_far+left_K_to_search_for] , tree._edgeLabel(starting_node, tree.root) + pattern, pattern_length + starting_node.depth, K)
 			
 			if error_so_far < K:
 				for res in tree.incomplete_results[error_so_far]:
 					last_mismatch_position = res[0][-1] +  starting_node.depth
 					result_node = res[1]
 					path_of_nodes = [(result_node, 0, [])]
-					#left_K_to_search_for = K - error_so_far
 					
-					#print (error_so_far, last_mismatch_position, left_K_to_search_for, tree._edgeLabel(result_node, tree.root)[:30])
 					for left_K_to_search_for in range (1, K - error_so_far + 1):
 						tt = find_approximate_matching(tree, pattern[result_node.depth - starting_node.depth:], left_K_to_search_for, result_node, path_of_nodes, suffixes_traversals[result_node.depth - starting_node.depth:])
 						for it in tt[0]:
@@ -927,12 +919,7 @@ def start():
 		print_results_given_list_of_node(tree, tree.complete_results[K] , tree._edgeLabel(starting_node, tree.root) + pattern, depth_in_tree_to_look_for, K)	
 		
 		
-		for k_value in range (1, K + 1):
-			pass
-			#print (k_value)
-			#print_results_given_list_of_node(tree, tree.complete_results[k_value] , tree._edgeLabel(starting_node, tree.root) + pattern, pattern_length + starting_node.depth, k_value)
-			#print_results_given_list_of_node(tree, tree.incomplete_results[k_value] , tree._edgeLabel(starting_node, tree.root) + pattern, pattern_length + starting_node.depth, k_value)
-		
+				
 		print ("Found approximate matching for k =", K, "in ", round((end_time - start), 5), "seconds")
 		
 		
@@ -943,7 +930,6 @@ def start():
 		delattr(tree, "OSHR_internal_nodes_left_to_right_list")
 	else:
 		print ("Please choose K value to be greater than 0")
-	
 	
 		
 start()
