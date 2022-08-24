@@ -39,8 +39,9 @@ Running command:
 python3 {OT_index_script}.py converted_fasta_file.DNA k pattern 
 ```
 
-- OT_index_script can be ET_using_base_paths.py or ET_using_base_suffixes.py
+- OT_index_script can be ET_using_base_paths.py or ET_using_base_suffixes.py.
 - k value must be an integer.
+- Pattern can be any sequence (for wildcards matching using a non {A,C,G,T,N} such as X)
 
 As an example:
 ```python
