@@ -28,11 +28,11 @@ return (str(self.idx) + "-" + str(self.depth))
 Firstly, you need to convert the genome in fasta format to a one-line genome which remove any non A, C, G, T, and N (case is sensitive) and headers. This can be done using the script filter_DNA_file_to_4_bases_and_N.py by running the command:
 
 ```python
-python filter_DNA_file_to_4_bases_and_N.py $file.fasta 
+python3 filter_DNA_file_to_4_bases_and_N.py $file.fasta 
 ```
 -------------------------------------------------------------------------------- Running the tool -----------------------------------------------------------
 
-The tool was tested on DNA sequences (fasta format). As a preparation process for the input data, remove headers and newlines from the fasta file so that all DNA sequence is stored in one line. The input for the tools is the converted fasta file. These tools are applicable for Hamming distance and Wildcards matching. 
+The tool was tested on DNA sequences (fasta format). As a preparation process for the input data, remove headers and newlines from the fasta file so that all DNA sequence is stored in one line. The input for the tools is the converted fasta file. These tools are applicable for Hamming distance and Wildcards matching. Edit distance to be implemented.  
 
 Running command:
 ```python
