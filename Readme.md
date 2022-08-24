@@ -44,7 +44,7 @@ python3 {OT_index_script}.py converted_fasta_file k pattern
 
 As an example:
 ```python
-python3 ET_using_base_paths.py.py some.fasta 1 AAAAAAAAAAAAA
+python3 ET_using_base_paths.py converted_fasta_file.DNA 1 AAAAAAAAAAAAA
 ```
 
 A sample output:
