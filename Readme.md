@@ -39,8 +39,8 @@ Running command:
 python3 {OT_index_script}.py converted_fasta_file k pattern 
 ```
 
-OT_index_script can be ET_using_base_paths.py or ET_using_base_suffixes.py
-k value must be an integer.
+- OT_index_script can be ET_using_base_paths.py or ET_using_base_suffixes.py
+- k value must be an integer.
 
 As an example:
 ```python
