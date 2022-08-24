@@ -1,5 +1,5 @@
 # ET
-The scripts are implemenation of error tree algoirthms for resolving the approximate matching problem. The full description is available at the preprint https://arxiv.org/pdf/2110.13802.pdf. 
+The scripts are implementation of error tree algorithms for resolving the approximate matching problem. The full description is available at the preprint https://arxiv.org/pdf/2110.13802.pdf. 
 Generally speaking, Pattern matching is a fundamental process in most scientific domains. The problem involves finding the starting positions of a given pattern (usually of short length) in a reference stream of data (of considerable length) as either exact or approximate (which allows for mismatches, insertions, or deletions) matching. For exact matching, several data structures built in linear time and space can be used in practice nowadays. The solutions proposed so far for approximate matching are non-linear, impractical, or heuristics. With the use of suffix trees and a tree structure derived from suffix trees, we designed and implemented a linear structure ($O(n)$) that resolves the approximate matching problem
 
 
@@ -12,24 +12,23 @@ Then edit ./suffix_trees/STree.py as the followings:
 - comment the following line, line 249, by appending "#" at the beginning of the line. This will allow setting attributes to the suffix tree more freely.
 __slots__ = ['_suffix_link', 'transition_links', 'idx', 'depth', 'parent', 'generalized_idxs']
 
-- In some procedure, we hashed suffix tree internal nodes, so we used only the combination of node index and node depth to identify uniquely an internal node instaed
-of the original identifcation of the nodes given by the library which is a bit long (shorter ideintifcation will use less space and speed up the lookup process for 
-the hashed nodes. So replace the following two lines (which are line 264 and 265) 
+- In some procedure, we hashed suffix tree internal nodes, so we used only the combination of node index and node depth to identify uniquely an internal node instead of the original identification of the nodes given by the library which is a bit long (shorter identification will use less space and speed up the lookup process for the hashed nodes. So replace the following two lines (which are line 264 and 265) 
 return ("SNode: idx:" + str(self.idx) + " depth:" + str(self.depth) +
                 " transitons:" + str(list(self.transition_links.keys())))
+
 with the line:
+
 return (str(self.idx) + "-" + str(self.depth))
 
 
 -------------------------------------------------------------------------------- Preparation --------------------------------------------------------------------------------------------
 
-Firstly, you need to convert the genome in fasta format to a one-line genome which remove any non A, C, G, T, and N (case is sensistive) and headers. This can be done using the script filter_DNA_file_to_4_bases_and_N.py by running the command:
+Firstly, you need to convert the genome in fasta format to a one-line genome which remove any non A, C, G, T, and N (case is sensitive) and headers. This can be done using the script filter_DNA_file_to_4_bases_and_N.py by running the command:
 
 python filter_DNA_file_to_4_bases_and_N.py $file.fasta 
 
 -------------------------------------------------------------------------------- Running the tool-----------------------------------------------------------------------
-The tool was tested on DNA sequences (fasta format). As a prepration process for the input data, remove headers and newlines from the fasta file so that all DNA sequence is 
-stored in one line. The input for the tools is the converted fasta file These tools are applicable for Hamming ditance and Wildcards matching. 
+The tool was tested on DNA sequences (fasta format). As a preparation process for the input data, remove headers and newlines from the fasta file so that all DNA sequence is stored in one line. The input for the tools is the converted fasta file. These tools are applicable for Hamming distance and Wildcards matching. 
 
 Running command:
 python3 {OT_index_script}.py converted_fasta_file k pattern 
@@ -38,7 +37,7 @@ OT_index_script can be ET_base_paths.py or ET_base_suffixes.py
 k value must be an integer.
 
 As an example:
-python3 {OT_index_script}.py /gcrf/KHCC/CTAG/NGS/tools_installation/Suffix_Tree/small.fasta 1 AAAAAAAAAAAAA
+python3 {OT_index_script}.py some.fasta 1 AAAAAAAAAAAAA
 
 A sample output are as following:
 Reading input data took 0.00013 seconds
@@ -62,7 +61,7 @@ sum_of_all_OT_indexes 109853
 
 ***** Phase 3 for building OT index for base paths finished in 0.44444 seconds
 ------------------------------------------------------------------------
-Approximate matchings:
+Approximate matching:
 ------------------------------------------------------------------------
 GAAAAAAAAAAAA 1 [0] 158 leaf node
 AGAAAAAAAAAAA 1 [1] 157 leaf node
@@ -80,8 +79,8 @@ AAAAAAAAAACAA 1 [10] 531 leaf node
 AAAAAAAAAAACA 1 [11] 530 leaf node
 AAAAAAAAAAAAT 1 [12] 191 leaf node
 
-Number of matchings is 15
-Number of position_combinations in the results 11
+Number of matching is 15
+Number of position combinations in the results 11
 Number of expected combinations 13
 All matching results is with a distance equal to 1 as should be
 Found approximate matching for k = 1 in  0.00139 seconds
@@ -90,4 +89,4 @@ Reading input data took 0.00014 seconds
 
 
 
-For conatct, please email AA.12682@KHCC.JO (the email of the first author Anas Al-okaily).
+For contact, please email AA.12682@KHCC.JO (the email of the first author Anas Al-okaily).
