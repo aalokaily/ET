@@ -99,8 +99,6 @@ def process_leaf_and_internal_nodes(tree):
 	
 def Build_OT_index(tree):
 
-	building_start = time.time()
-	
 	def phase_1_for_OT_indexing_of_base_paths(tree):
 		#index OSHR nodes under ST internal nodes and index inbetween top base nodes
 		setattr(tree, "temp", defaultdict(int))
@@ -797,7 +795,9 @@ def start():
 		
 		
 		print ("------------------------------------------------------------------------------------------")	
+		start = time.time()
 		Build_OT_index(tree)
+		print ("Building OT index using base paths took", round((time.time() - start), 5), "seconds")
 		
 
 		start = time.time()
@@ -879,7 +879,6 @@ def start():
 		delattr(tree, "OSHR_internal_nodes_left_to_right_list")
 	else:
 		print ("Please choose K value to be greater than 0")
-	
 	
 		
 start()
