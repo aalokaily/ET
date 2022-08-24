@@ -1,5 +1,3 @@
-import sys
-import os
 import fileinput
  
 fasta_file = sys.argv[1]
