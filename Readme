@@ -41,26 +41,27 @@ As an example:
 python3 {OT_index_script}.py some.fasta 1 AAAAAAAAAAAAA
 
 A sample output:
-Reading input data took 0.00013 seconds
+Reading input data took 0.00014 seconds
 ------------------------------------------------------------------------------------------
-Building Suffix Tree took 0.41289 seconds
+Building Suffix Tree took 0.41073 seconds
 ------------------------------------------------------------------------------------------
 Number of internal nodes is 31628
 Number of leaves is 47962
-Processing leaf and internal nodes took 0.61162 seconds
+Processing leaf and internal nodes took 0.6174 seconds
 ------------------------------------------------------------------------------------------
 Number of OSHR leaf_nodes is 12029
 Number of OSHR internal nodes is 19599
 In total of 31628
 
-***** Phase 1 for building OT index for base paths finished in 0.36448 seconds
+***** Phase 1 for building OT index for base paths finished in 0.3652 seconds
 Length of OT index  109853
 Left and right OT index of root 0 109853
 
-***** Phase 2 for building OT index for base paths finished in 0.41466 seconds
+***** Phase 2 for building OT index for base paths finished in 0.42125 seconds
 sum_of_all_OT_indexes 109853
 
-***** Phase 3 for building OT index for base paths finished in 0.44444 seconds
+***** Phase 3 for building OT index for base paths finished in 0.44562 seconds
+Building OT index using base paths took 1.23214 seconds
 ------------------------------------------------------------------------
 Approximate matchings:
 ------------------------------------------------------------------------
@@ -81,10 +82,10 @@ AAAAAAAAAAACA 1 [11] 530 leaf node
 AAAAAAAAAAAAT 1 [12] 191 leaf node
 
 Number of matchings is 15
-Number of position combinations in the results 11
+Number of position_combinations in the results 11
 Number of expected combinations 13
 All matching results is with a distance equal to 1 as should be
-Found approximate matching for k = 1 in  0.00139 seconds
+Found approximate matching for k = 1 in  0.00141 seconds
 
 
 
