@@ -10,7 +10,7 @@ https://github.com/ptrus/suffix-trees
 
 Then edit ./suffix_trees/STree.py as the followings:
 
-- comment the following line, line 249, by appending "#" at the beginning of the line. This will allow setting attributes to the suffix tree more freely.
+- comment the following line, line 249, by inserting the character "#" at the beginning of the line. This will allow setting attributes to the suffix tree more freely.
 ```python
 __slots__ = ['_suffix_link', 'transition_links', 'idx', 'depth', 'parent', 'generalized_idxs']
 ```
