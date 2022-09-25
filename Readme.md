@@ -52,51 +52,79 @@ python3 ET_using_base_paths.py converted_fasta_file.DNA 1 AAAAAAAAAAAAA
 
 A sample output:
 ```
+length of pattern 19
 Reading input data took 0.00014 seconds
 ------------------------------------------------------------------------------------------
-Building Suffix Tree took 0.41073 seconds
+Building Suffix Tree took 0.41792 seconds
 ------------------------------------------------------------------------------------------
-Number of internal nodes is 31628
-Number of leaves is 47962
-Processing leaf and internal nodes took 0.6174 seconds
+Number of internal nodes is 31627
+Number of leaves is 47961
+Processing leaf and internal nodes took 0.63112 seconds
 ------------------------------------------------------------------------------------------
-Number of OSHR leaf_nodes is 12029
-Number of OSHR internal nodes is 19599
-In total of 31628
 
-***** Phase 1 for building OT index for base paths finished in 0.3652 seconds
-Length of OT index  109853
-Left and right OT index of root 0 109853
+***** Phase 1 for finding base suffixes finished in 0.46034 seconds
+Length of OT index  426695
+Left and right OT index of root 0 426695
 
-***** Phase 2 for building OT index for base paths finished in 0.42125 seconds
-sum_of_all_OT_indexes 109853
-
-***** Phase 3 for building OT index for base paths finished in 0.44562 seconds
-Building OT index using base paths took 1.23214 seconds
+***** Phase 2 for building OT index using base suffixes finished in 0.79204 seconds
+Building OT index using base paths took 1.25245 seconds
 ------------------------------------------------------------------------
-Approximate matchings:
+Approximate matchings for k value of  1
 ------------------------------------------------------------------------
-GAAAAAAAAAAAA 1 [0] 158 leaf node
-AGAAAAAAAAAAA 1 [1] 157 leaf node
-AAGAAAAAAAAAA 1 [2] 156 leaf node
-AAAGAAAAAAAAA 1 [3] 155 leaf node
-AAAAATAAAAAAA 1 [5] 14979 leaf node
-AAAAAATAAAAAA 1 [6] 14978
-AAAAAATAAAAAA 1 [6] 47350
-AAAAAATAAAAAA 1 [6] 11694
-AAAAAAGAAAAAA 1 [6] 38905 leaf node
-AAAAAAATAAAAA 1 [7] 14977 leaf node
-AAAAAAAGAAAAA 1 [7] 38904 leaf node
-AAAAAAAAACAAA 1 [9] 532 leaf node
-AAAAAAAAAACAA 1 [10] 531 leaf node
-AAAAAAAAAAACA 1 [11] 530 leaf node
-AAAAAAAAAAAAT 1 [12] 191 leaf node
+GAAAAAAAAAAAAAAAAAA 1 [0] 157 leaf node
+AGAAAAAAAAAAAAAAAAA 1 [1] 156 leaf node
+AAGAAAAAAAAAAAAAAAA 1 [2] 155 leaf node
+AAAGAAAAAAAAAAAAAAA 1 [3] 154 leaf node
+AAAAAAAAAAAAAAAAAAT 1 [18] 184 leaf node
 
-Number of matchings is 15
-Number of position_combinations in the results 11
-Number of expected combinations 13
-All matching results is with a distance equal to 1 as should be
-Found approximate matching for k = 1 in  0.00141 seconds
+Number of matchings is 5
+Number of position_combinations in the results 5
+Number of expected combinations 19
+All matching_results is with a distance equal to 1 as should be
+All mismatches positions is equal to 1 as should be
+------------------------------------------------------------------------
+Approximate matchings for k value of  2
+------------------------------------------------------------------------
+TAAAGAAAAAAAAAAAAAA 2 [0, 4] 153 leaf node
+AAAAAAAAAAAAAAAAATG 2 [17, 18] 185 leaf node
+
+Number of matchings is 2
+Number of position_combinations in the results 2
+Number of expected combinations 171
+All matching_results is with a distance equal to 2 as should be
+All mismatches positions is equal to 2 as should be
+------------------------------------------------------------------------
+Approximate matchings for k value of  3
+------------------------------------------------------------------------
+TTAAAGAAAAAAAAAAAAA 3 [0, 1, 5] 152 leaf node
+TAAAAAAATAAAAAAATAA 3 [0, 8, 19] 14975 leaf node
+ATTAAAGAAAAAAAAAAAA 3 [1, 2, 6] 151 leaf node
+ATAATAAAAAAAGAAAAAA 3 [1, 4, 13] 38898 leaf node
+ATAAAAATAAAAATAAAAA 3 [1, 7, 13] 19781
+ATAAAAATAAAAATAAAAA 3 [1, 7, 13] 19775
+AATTAAAAAAAAAAACAAA 3 [2, 3, 19] 525 leaf node
+AATAATAAAAAAAGAAAAA 3 [2, 5, 14] 38897 leaf node
+AATAAAAATAAAAATAAAA 3 [2, 8, 14] 19780 leaf node
+AAATTAAAAAAAAAAACAA 3 [3, 4, 20] 524 leaf node
+AAATAATAAAAAAAGAAAA 3 [3, 6, 17] 38896 leaf node
+AAATAAAAATAAAAATAAA 3 [3, 9, 15] 19779 leaf node
+AAAATAAAAATAAAAATAA 3 [4, 10, 16] 19778 leaf node
+AAAATAAAAATAAAAACAA 3 [4, 10, 16] 19784 leaf node
+AAAAATAAAAATAAAAATA 3 [5, 11, 17] 19777 leaf node
+AAAAATAAAAATAAAAACA 3 [5, 11, 17] 19783 leaf node
+AAAAATAAAAAAGAAAGAA 3 [5, 12, 18] 47350 leaf node
+AAAAAATAAAAAAGAAAGA 3 [6, 13, 19] 47349 leaf node
+AAAAAAATAAAAAAATAAT 3 [7, 17, 20] 14976 leaf node
+AAAAAAAAAAAAAAATGTA 3 [15, 16, 17] 187 leaf node
+AAAAAAAAAAAAAAAATGT 3 [16, 17, 18] 186 leaf node
+
+Number of matchings is 21
+Number of position_combinations in the results 18
+Number of expected combinations 969
+All matching_results is with a distance equal to 3 as should be
+All mismatches positions is equal to 3 as should be
+Found approximate matching for k = 3 in  0.12331 seconds
+
 ```
 
 
