@@ -52,7 +52,7 @@ python3 ET_using_base_paths.py converted_fasta_file.DNA 3 AAAAAAAAAAAAAAAAAAA
 
 A sample output:
 ```
-length of pattern 19
+Length of pattern 19
 Reading input data took 0.00014 seconds
 ------------------------------------------------------------------------------------------
 Building Suffix Tree took 0.41792 seconds
