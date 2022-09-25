@@ -34,7 +34,7 @@ python3 Convert_fasta_file_to_4_bases_and_N.py $file.fasta > converted_fasta_fil
 ```
 -------------------------------------------------------------------------------- Running the tool -----------------------------------------------------------
 
-The tool was tested on DNA sequences (fasta format). As a preparation process for the input data, remove headers and newlines from the fasta file so that all DNA sequence is stored in one line. The input for the tools is the converted fasta file. These tools are applicable for Hamming distance and Wildcards matching. Edit distance to be implemented.  
+The input for the tools is the converted fasta file. These tools are applicable for Hamming distance and Wildcards matching. Edit distance to be implemented.  
 
 Running command:
 ```python
