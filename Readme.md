@@ -123,7 +123,7 @@ Number of position_combinations in the results 18
 Number of expected combinations 969
 All matching_results is with a distance equal to 3 as should be
 All mismatches positions is equal to 3 as should be
-Found approximate matching for k = 3 in  0.12331 seconds
+Found approximate matching for 1 <= k <= 3 in  0.12331 seconds
 
 ```
 
