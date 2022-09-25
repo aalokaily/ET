@@ -958,7 +958,7 @@ def start():
 			print_results_given_list_of_node(tree, tree.complete_matching_results[k] , tree._edgeLabel(starting_node, tree.root) + pattern, depth_in_tree_to_search_for, k)	
 		
 
-		print ("Found approximate matching for k =", given_k, "in ", round((end_time - start), 5), "seconds")
+		print ("Found approximate matching for 1 <= k <=", given_k, "in ", round((end_time - start), 5), "seconds")
 		
 		delattr(tree, "leaf_suffix_index_to_leaf_memory_list")
 		delattr(tree, "left_to_right_suffix_indexes_list")
