@@ -847,7 +847,7 @@ def start():
 	given_k = int(sys.argv[2])
 	pattern = sys.argv[3]
 	pattern_length = len(pattern)
-	print ("length of pattern", pattern_length)
+	print ("Length of pattern", pattern_length)
 	
 	if given_k <= 0  or given_k > pattern_length:
 		print ("Please choose K value to be greater than 0 and greater than or equal to length of the pattern")
