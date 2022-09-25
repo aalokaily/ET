@@ -15,7 +15,7 @@ Then edit ./suffix_trees/STree.py as the followings:
 __slots__ = ['_suffix_link', 'transition_links', 'idx', 'depth', 'parent', 'generalized_idxs']
 ```
 
-- In some procedures, we hashed internal nodes of suffix tree, to optimize this hashing we used only the combination of node index and node depth to identify uniquely an internal node instead of the original identification/naming of the nodes given by the library which is a bit long (shorter identification will use less space and speed up the lookup process for the hashed nodes. So replace the following two lines (which are line 264 and 265) 
+- In some procedures, we hashed internal nodes of suffix tree, to optimize this hashing we used only the combination of node index and node depth to identify uniquely an internal node instead of the original identification/naming of the nodes given by the library which is a bit long (shorter identification will use less space and speed up the lookup process for the hashed nodes). So replace the following two lines (which are line 264 and 265) 
 ```python
 return ("SNode: idx:" + str(self.idx) + " depth:" + str(self.depth) +
                 " transitons:" + str(list(self.transition_links.keys())))
