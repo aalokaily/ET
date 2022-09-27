@@ -491,7 +491,7 @@ def find_approximate_matching(tree, pattern, k_value_to_search_for, last_number_
 									node = node.parent	
 				
 					if did_not_find_matching:						
-						#print ("OT index", tree._edgeLabel(transition_node, tree.root), tree._edgeLabel(suffix_end_node, tree.root)[:30])
+						#print ("Means a prefix of the pattern was found using OT index, the prefix is", tree._edgeLabel(matching_node, transition_node)[:pattern_length - (transition_node.depth - depth_of_main_node)])
 						matching_node = transition_node # default value if no OT index found 
 						if transition_node.left_OT_index != transition_node.right_OT_index:  # if they are equal; then no OT indexing has been performed under this node and hence nothing to be done or matching to be computed
 							f = True
