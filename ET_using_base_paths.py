@@ -453,7 +453,7 @@ def find_approximate_matching(tree, pattern, k_value_to_search_for, last_number_
 							incomplete_matching_results[last_number_of_mismatches + number_of_mismatches].append((transition_node, mismatches_positions))
 							#print ("incomplete matching using OT index when matching_node == transition_node (deepest_matching_internal_node is none)", tree._edgeLabel(matching_node, tree.root)[:30], last_number_of_mismatches + number_of_mismatches)
 						else:
-							#print ("Means a prefix of the pattern was found using OT index, the prefix is", tree._edgeLabel(matching_node, transition_node))
+							#print ("Means a prefix of the pattern was found using OT index, the prefix is", tree._edgeLabel(matching_node, transition_node)[:pattern_length - (transition_node.depth - depth_of_main_node)])
 							if suffix_errors == 0:
 								if number_of_mismatches == k_value_to_search_for:
 									if matching_node.depth >= depth_in_tree_to_search_for:
