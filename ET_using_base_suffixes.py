@@ -507,7 +507,7 @@ def find_approximate_matching(tree, pattern, k_value_to_search_for, last_number_
 									depth_required = suffix_end_node.depth 
 									
 									deepest_matching_internal_node = find_end_node_given_suffix_key_and_depth(transition_node, key_of_suffix_to_search_for, depth_required)
-									matching_node = deepest_matching_internal_node #
+									matching_node = deepest_matching_internal_node
 									
 								else:
 									suffix_end_node = suffix_end_node.parent
