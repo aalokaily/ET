@@ -955,7 +955,7 @@ def start():
         print ("------------------------------------------------------------------------------------------")    
         start = time.time()
         Build_OT_index(tree)
-        print ("Building OT index using base paths took", round((time.time() - start), 5), "seconds")
+        print ("Building OT index using base suffixes took", round((time.time() - start), 5), "seconds")
         
         start = time.time()
         
