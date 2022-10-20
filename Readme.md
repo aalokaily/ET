@@ -4,8 +4,9 @@ Generally speaking, Pattern matching is a fundamental process in most scientific
 
 
 ------------------------------------------------------------- Prerequisite ---------------------------------------------------------------
+* Install bisect library from https://docs.python.org/3/library/bisect.html 
 
-Install the following library that will be used to build suffix trees:
+* Install the following library that will be used to build suffix trees:
 https://github.com/ptrus/suffix-trees 
 
 Then edit ./suffix_trees/STree.py as the followings:
