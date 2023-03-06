@@ -465,8 +465,8 @@ def find_approximate_matching(tree, sentinel_character, given_pattern_length, pa
                 
                 elif suffix_end_node.depth >= depth_in_tree_to_search_for - transition_node.depth: # and number_of_mismatches must == k_value_to_search_for
                     left_position  =  bisect.bisect_left(suffix_end_node.OT_indexes, transition_node.left_OT_index)
-                    right_position =  bisect.bisect_left(suffix_end_node.OT_indexes, transition_node.right_OT_index)
-                    if left_position != right_position:
+                    
+                    if left_position < len(suffix_end_node.OT_indexes) and suffix_end_node.OT_indexes[left_position] < transition_node.right_OT_index:
                         OT_index_of_a_base_path = suffix_end_node.OT_indexes[left_position]
                         guided_suffix = tree.OT_index[OT_index_of_a_base_path]
                         suffix_to_search_for = guided_suffix - transition_node.depth
