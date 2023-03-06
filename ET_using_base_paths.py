@@ -423,8 +423,8 @@ def find_approximate_matching(tree, sentinel_character, given_pattern_length, pa
                                 
                                 while suffix_end_node.depth >= min_depth:
                                     left_position  =  bisect.bisect_left(suffix_end_node.OT_indexes, transition_node.left_OT_index)
-                                    right_position =  bisect.bisect_left(suffix_end_node.OT_indexes, transition_node.right_OT_index)
-                                    if left_position != right_position:
+                                    
+                                    if left_position < len(suffix_end_node.OT_indexes) and suffix_end_node.OT_indexes[left_position] < transition_node.right_OT_index:
                                         #print ("Found using OT index")
                                         OT_index_of_a_base_path = suffix_end_node.OT_indexes[left_position]
                                         guided_suffix = tree.OT_index[OT_index_of_a_base_path]
@@ -463,10 +463,12 @@ def find_approximate_matching(tree, sentinel_character, given_pattern_length, pa
                                                             if any_suffix_under_matching_node.key  >= suffix_end_node.key_of_leftmost_leaf and any_suffix_under_matching_node.key <= suffix_end_node.key_of_rightmost_leaf:
                                                                 complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
                                         break
+                                        
                                     else:
                                         suffix_end_node = suffix_end_node.parent
                                         #print ("backtracking", tree._edgeLabel(suffix_end_node, tree.root)[:30])
-                                     
+                                        
+                                    
 
 
 
