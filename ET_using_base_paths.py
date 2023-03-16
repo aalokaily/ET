@@ -850,7 +850,7 @@ def print_results_given_list_of_node(tree, matching_nodes, pattern, pattern_leng
             else:
                 print ("All mismatches positions is equal to", k, "as should be")
     else:
-        print ("No approximate matching found")
+        print ("Number of matching is", 0)
      
 #################################################### Search for query functions ##############################################################  
 
