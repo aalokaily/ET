@@ -122,10 +122,16 @@ def find_approximate_matching(tree, sentinel_character, given_pattern_length, pa
                     #print ("incompleted_results when number_of_mismatches < k_value_to_search_for", tree._edgeLabel(transition_node, tree.root)[:30])
                 
                 elif suffix_end_node.depth >= depth_in_tree_to_search_for - transition_node.depth: # and number_of_mismatches must == k_value_to_search_for
-                    matching_node = find_end_node_of_exact_path_of_string_starting_from_a_node(tree, pattern[transition_node.depth - main_node.depth:], transition_node, suffixes_traversals[d:])
-                    if matching_node.depth >= depth_in_tree_to_search_for:
-                        complete_matching_results[last_number_of_mismatches + k_value_to_search_for].append((matching_node, mismatches_positions))
-                        #print ("completed_results explicit walking", tree._edgeLabel(matching_node, tree.root)[:30])
+                    # if suffix_end_node.is_leaf() then search out it under transition node as follow:
+                    if suffix_end_node.is_leaf():
+                        suffix_number_under_transition_node = tree.leaf_suffix_index_to_leaf_memory_list[suffix_end_node.idx - transition_node.depth]
+                        if suffix_number_under_transition_node.key >= transition_node.key_of_leftmost_leaf and suffix_number_under_transition_node.key <= transition_node.key_of_rightmost_leaf:
+                            complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((suffix_number_under_transition_node, mismatches_positions))
+                    else:
+                        matching_node = find_end_node_of_exact_path_of_string_starting_from_a_node(tree, pattern[transition_node.depth - main_node.depth:], transition_node, suffixes_traversals[d:])
+                        if matching_node.depth >= depth_in_tree_to_search_for:
+                            complete_matching_results[last_number_of_mismatches + k_value_to_search_for].append((matching_node, mismatches_positions))
+                            #print ("completed_results explicit walking", tree._edgeLabel(matching_node, tree.root)[:30])
                        
 
     return (complete_matching_results, incomplete_matching_results)
