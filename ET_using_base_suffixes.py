@@ -464,17 +464,23 @@ def find_approximate_matching(tree, sentinel_character, given_pattern_length, pa
                     #print ("incompleted_results when number_of_mismatches < k_value_to_search_for", tree._edgeLabel(transition_node, tree.root)[:30])
                 
                 elif suffix_end_node.depth >= depth_in_tree_to_search_for - transition_node.depth: # and number_of_mismatches must == k_value_to_search_for
-                    left_position  =  bisect.bisect_left(suffix_end_node.OT_indexes, transition_node.left_OT_index)
-                    
-                    if left_position < len(suffix_end_node.OT_indexes) and suffix_end_node.OT_indexes[left_position] < transition_node.right_OT_index:
-                        OT_index_of_a_base_path = suffix_end_node.OT_indexes[left_position]
-                        guided_suffix = tree.OT_index[OT_index_of_a_base_path]
-                        suffix_to_search_for = guided_suffix - transition_node.depth
-                        key_of_suffix_to_search_for = tree.leaf_suffix_index_to_leaf_memory_list[suffix_to_search_for].key
-                        depth_required = suffix_end_node.depth 
+                    # if suffix_end_node.is_leaf() then search out it under transition node as follow:
+                    if suffix_end_node.is_leaf():
+                        suffix_number_under_transition_node = tree.leaf_suffix_index_to_leaf_memory_list[suffix_end_node.idx - transition_node.depth]
+                        if suffix_number_under_transition_node.key >= transition_node.key_of_leftmost_leaf and suffix_number_under_transition_node.key <= transition_node.key_of_rightmost_leaf:
+                            complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((suffix_number_under_transition_node, mismatches_positions))
+                    else:
+                        left_position  =  bisect.bisect_left(suffix_end_node.OT_indexes, transition_node.left_OT_index)
                         
-                        matching_node = find_end_node_given_suffix_key_and_depth(transition_node, key_of_suffix_to_search_for, depth_required)
-                        complete_matching_results[last_number_of_mismatches + k_value_to_search_for].append((matching_node, mismatches_positions))
+                        if left_position < len(suffix_end_node.OT_indexes) and suffix_end_node.OT_indexes[left_position] < transition_node.right_OT_index:
+                            OT_index_of_a_base_path = suffix_end_node.OT_indexes[left_position]
+                            guided_suffix = tree.OT_index[OT_index_of_a_base_path]
+                            suffix_to_search_for = guided_suffix - transition_node.depth
+                            key_of_suffix_to_search_for = tree.leaf_suffix_index_to_leaf_memory_list[suffix_to_search_for].key
+                            depth_required = suffix_end_node.depth 
+                            
+                            matching_node = find_end_node_given_suffix_key_and_depth(transition_node, key_of_suffix_to_search_for, depth_required)
+                            complete_matching_results[last_number_of_mismatches + k_value_to_search_for].append((matching_node, mismatches_positions))
                             
 
     return (complete_matching_results, incomplete_matching_results)
