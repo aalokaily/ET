@@ -373,102 +373,108 @@ def find_approximate_matching(tree, sentinel_character, given_pattern_length, pa
                     #print ("incompleted_results when number_of_mismatches < k_value_to_search_for", tree._edgeLabel(transition_node, tree.root)[:30])
                 
                 elif suffix_end_node.depth >= depth_in_tree_to_search_for - transition_node.depth: # and number_of_mismatches must == k_value_to_search_for
-                    # check first if matching results is within the direct child nodes under transition_node
-                    did_not_find_matching_under_transition_node = True
-                    for node in transition_node.transition_links.values():
-                        if node.depth >= depth_in_tree_to_search_for:
-                            if node.is_leaf():
-                                suffix_number_under_node = tree.leaf_suffix_index_to_leaf_memory_list[node.idx + transition_node.depth]
-                                if suffix_end_node.is_leaf():
-                                    if suffix_number_under_node.key == suffix_end_node.key:
-                                        complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
-                                        did_not_find_matching_under_transition_node = False
-                                        #print ("completed_results when suffix_end_node is leaf node under transition_node and suffix_end_node is leaf", tree._edgeLabel(node, tree.root)[:30])
-                                else:
-                                    if suffix_number_under_node.key  >= suffix_end_node.key_of_leftmost_leaf and suffix_number_under_node.key <= suffix_end_node.key_of_rightmost_leaf:
-                                        complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
-                                        did_not_find_matching_under_transition_node = False
-                                        #print ("completed_results when suffix_end_node is leaf node under transition_node and suffix_end_node is internal", tree._edgeLabel(node, tree.root)[:30])
-                            else:
-                                tt = tree.left_to_right_suffix_indexes_list[node.key_of_leftmost_leaf]
-                                any_suffix_under_transition_node = tree.leaf_suffix_index_to_leaf_memory_list[tt + transition_node.depth]
-                                
-                                if suffix_end_node.is_leaf():
-                                    if any_suffix_under_transition_node.key == suffix_end_node.key:
-                                        complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
-                                        did_not_find_matching_under_transition_node = False
-                                        #print ("completed_results when suffix_end_node is internal node under transition_node and suffix_end_node is leaf", tree._edgeLabel(node, tree.root)[:30])
-                                else:
-                                    if any_suffix_under_transition_node.key  >= suffix_end_node.key_of_leftmost_leaf and any_suffix_under_transition_node.key <= suffix_end_node.key_of_rightmost_leaf:
-                                        complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
-                                        did_not_find_matching_under_transition_node = False
-                                        #print ("completed_results when suffix_end_node is internal node under transition_node and suffix_end_node is internal", tree._edgeLabel(node, tree.root)[:30])
-                            
-                    if did_not_find_matching_under_transition_node:
-                        ll = transition_node.depth - depth_of_main_node
-                        chrt = pattern[ll]
-                        if chrt in transition_node.transition_links:
-                            ttt = transition_node.transition_links[chrt]
-                            if not ttt.is_leaf():
-                                min_depth = ttt.depth - transition_node.depth
-                                if hasattr (ttt, "depth_of_deepest_non_grand_internal_node"): # this also to make sure that there are descandant internal node
-                                    max_depth = min_depth + ttt.depth_of_deepest_non_grand_internal_node
-                                else:
-                                    max_depth = min_depth
-                                    
-                                try:
-                                    suffix_end_node = suffixes_traversals[d][max_depth]
-                                except:
-                                    suffix_end_node = suffixes_traversals[d][-1]
-                                
-                                while suffix_end_node.depth >= min_depth:
-                                    left_position  =  bisect.bisect_left(suffix_end_node.OT_indexes, transition_node.left_OT_index)
-                                    
-                                    if left_position < len(suffix_end_node.OT_indexes) and suffix_end_node.OT_indexes[left_position] < transition_node.right_OT_index:
-                                        #print ("Found using OT index")
-                                        OT_index_of_a_base_path = suffix_end_node.OT_indexes[left_position]
-                                        guided_suffix = tree.OT_index[OT_index_of_a_base_path]
-                                        suffix_to_search_for = guided_suffix - transition_node.depth
-                                        key_of_suffix_to_search_for = tree.leaf_suffix_index_to_leaf_memory_list[suffix_to_search_for].key
-                                        depth_required = suffix_end_node.depth 
-                                        matching_node = find_end_node_given_suffix_key_and_depth(transition_node, key_of_suffix_to_search_for, depth_required)
-                                        #print (matching_node.depth , depth_in_tree_to_search_for, tree._edgeLabel(matching_node, tree.root)[:30])
-                                        if matching_node.depth >= depth_in_tree_to_search_for:
-                                            complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((matching_node, mismatches_positions))
-                                            #print ("completed_results using OT index", tree._edgeLabel(matching_node, tree.root)[:30])
-                                        else:
-                                            d = matching_node.depth - depth_of_main_node
-                                            suffix_end_node = suffixes_traversals[d][-1]
-                                            
-                                            for node in matching_node.transition_links.values():
-                                                #print (tree._edgeLabel(node, tree.root)[:30])
-                                                if node.depth >= depth_in_tree_to_search_for:
-                                                    if node.is_leaf():
-                                                        suffix_number_under_node = tree.leaf_suffix_index_to_leaf_memory_list[node.idx + matching_node.depth]
-                                                        if suffix_end_node.is_leaf():
-                                                            if suffix_number_under_node.key == suffix_end_node.key:
-                                                                complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
-                                                        else:
-                                                            if suffix_number_under_node.key  >= suffix_end_node.key_of_leftmost_leaf and suffix_number_under_node.key <= suffix_end_node.key_of_rightmost_leaf:
-                                                                complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
-                                                                
-                                                    else:
-                                                        tt = tree.left_to_right_suffix_indexes_list[node.key_of_leftmost_leaf]
-                                                        any_suffix_under_matching_node = tree.leaf_suffix_index_to_leaf_memory_list[tt + matching_node.depth]
-                                                        
-                                                        if suffix_end_node.is_leaf():
-                                                            if any_suffix_under_matching_node.key == suffix_end_node.key:
-                                                                complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
-                                                        else:
-                                                            if any_suffix_under_matching_node.key  >= suffix_end_node.key_of_leftmost_leaf and any_suffix_under_matching_node.key <= suffix_end_node.key_of_rightmost_leaf:
-                                                                complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
-                                        break
-                                        
+                    # if suffix_end_node.is_leaf() then search out it under transition node as follow:
+                    if suffix_end_node.is_leaf():
+                        suffix_number_under_transition_node = tree.leaf_suffix_index_to_leaf_memory_list[suffix_end_node.idx - transition_node.depth]
+                        if suffix_number_under_transition_node.key >= transition_node.key_of_leftmost_leaf and suffix_number_under_transition_node.key <= transition_node.key_of_rightmost_leaf:
+                            complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((suffix_number_under_transition_node, mismatches_positions))
+                    else:
+                        # check first if matching results is within the direct child nodes under transition_node
+                        did_not_find_matching_under_transition_node = True
+                        for node in transition_node.transition_links.values():
+                            if node.depth >= depth_in_tree_to_search_for:
+                                if node.is_leaf():
+                                    suffix_number_under_node = tree.leaf_suffix_index_to_leaf_memory_list[node.idx + transition_node.depth]
+                                    if suffix_end_node.is_leaf():
+                                        if suffix_number_under_node.key == suffix_end_node.key:
+                                            complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
+                                            did_not_find_matching_under_transition_node = False
+                                            #print ("completed_results when suffix_end_node is leaf node under transition_node and suffix_end_node is leaf", tree._edgeLabel(node, tree.root)[:30])
                                     else:
-                                        suffix_end_node = suffix_end_node.parent
-                                        #print ("backtracking", tree._edgeLabel(suffix_end_node, tree.root)[:30])
-                                        
+                                        if suffix_number_under_node.key  >= suffix_end_node.key_of_leftmost_leaf and suffix_number_under_node.key <= suffix_end_node.key_of_rightmost_leaf:
+                                            complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
+                                            did_not_find_matching_under_transition_node = False
+                                            #print ("completed_results when suffix_end_node is leaf node under transition_node and suffix_end_node is internal", tree._edgeLabel(node, tree.root)[:30])
+                                else:
+                                    tt = tree.left_to_right_suffix_indexes_list[node.key_of_leftmost_leaf]
+                                    any_suffix_under_transition_node = tree.leaf_suffix_index_to_leaf_memory_list[tt + transition_node.depth]
                                     
+                                    if suffix_end_node.is_leaf():
+                                        if any_suffix_under_transition_node.key == suffix_end_node.key:
+                                            complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
+                                            did_not_find_matching_under_transition_node = False
+                                            #print ("completed_results when suffix_end_node is internal node under transition_node and suffix_end_node is leaf", tree._edgeLabel(node, tree.root)[:30])
+                                    else:
+                                        if any_suffix_under_transition_node.key  >= suffix_end_node.key_of_leftmost_leaf and any_suffix_under_transition_node.key <= suffix_end_node.key_of_rightmost_leaf:
+                                            complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
+                                            did_not_find_matching_under_transition_node = False
+                                            #print ("completed_results when suffix_end_node is internal node under transition_node and suffix_end_node is internal", tree._edgeLabel(node, tree.root)[:30])
+                                
+                        if did_not_find_matching_under_transition_node:
+                            ll = transition_node.depth - depth_of_main_node
+                            chrt = pattern[ll]
+                            if chrt in transition_node.transition_links:
+                                ttt = transition_node.transition_links[chrt]
+                                if not ttt.is_leaf():
+                                    min_depth = ttt.depth - transition_node.depth
+                                    if hasattr (ttt, "depth_of_deepest_non_grand_internal_node"): # this also to make sure that there are descandant internal node
+                                        max_depth = min_depth + ttt.depth_of_deepest_non_grand_internal_node
+                                    else:
+                                        max_depth = min_depth
+                                        
+                                    try:
+                                        suffix_end_node = suffixes_traversals[d][max_depth]
+                                    except:
+                                        suffix_end_node = suffixes_traversals[d][-1]
+                                    
+                                    while suffix_end_node.depth >= min_depth:
+                                        left_position  =  bisect.bisect_left(suffix_end_node.OT_indexes, transition_node.left_OT_index)
+                                        
+                                        if left_position < len(suffix_end_node.OT_indexes) and suffix_end_node.OT_indexes[left_position] < transition_node.right_OT_index:
+                                            #print ("Found using OT index")
+                                            OT_index_of_a_base_path = suffix_end_node.OT_indexes[left_position]
+                                            guided_suffix = tree.OT_index[OT_index_of_a_base_path]
+                                            suffix_to_search_for = guided_suffix - transition_node.depth
+                                            key_of_suffix_to_search_for = tree.leaf_suffix_index_to_leaf_memory_list[suffix_to_search_for].key
+                                            depth_required = suffix_end_node.depth 
+                                            matching_node = find_end_node_given_suffix_key_and_depth(transition_node, key_of_suffix_to_search_for, depth_required)
+                                            #print (matching_node.depth , depth_in_tree_to_search_for, tree._edgeLabel(matching_node, tree.root)[:30])
+                                            if matching_node.depth >= depth_in_tree_to_search_for:
+                                                complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((matching_node, mismatches_positions))
+                                                #print ("completed_results using OT index", tree._edgeLabel(matching_node, tree.root)[:30])
+                                            else:
+                                                d = matching_node.depth - depth_of_main_node
+                                                suffix_end_node = suffixes_traversals[d][-1]
+                                                
+                                                for node in matching_node.transition_links.values():
+                                                    #print (tree._edgeLabel(node, tree.root)[:30])
+                                                    if node.depth >= depth_in_tree_to_search_for:
+                                                        if node.is_leaf():
+                                                            suffix_number_under_node = tree.leaf_suffix_index_to_leaf_memory_list[node.idx + matching_node.depth]
+                                                            if suffix_end_node.is_leaf():
+                                                                if suffix_number_under_node.key == suffix_end_node.key:
+                                                                    complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
+                                                            else:
+                                                                if suffix_number_under_node.key  >= suffix_end_node.key_of_leftmost_leaf and suffix_number_under_node.key <= suffix_end_node.key_of_rightmost_leaf:
+                                                                    complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
+                                                                    
+                                                        else:
+                                                            tt = tree.left_to_right_suffix_indexes_list[node.key_of_leftmost_leaf]
+                                                            any_suffix_under_matching_node = tree.leaf_suffix_index_to_leaf_memory_list[tt + matching_node.depth]
+                                                            
+                                                            if suffix_end_node.is_leaf():
+                                                                if any_suffix_under_matching_node.key == suffix_end_node.key:
+                                                                    complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
+                                                            else:
+                                                                if any_suffix_under_matching_node.key  >= suffix_end_node.key_of_leftmost_leaf and any_suffix_under_matching_node.key <= suffix_end_node.key_of_rightmost_leaf:
+                                                                    complete_matching_results[last_number_of_mismatches + number_of_mismatches].append((node, mismatches_positions))
+                                            break
+                                            
+                                        else:
+                                            suffix_end_node = suffix_end_node.parent
+                                            #print ("backtracking", tree._edgeLabel(suffix_end_node, tree.root)[:30])
+                                            
+                                        
 
 
 
