@@ -68,12 +68,7 @@ def process_leaf_and_internal_nodes(tree):
     preprocessing(tree)
     
     
-    #Collect strings under leaf nodes in OSHR tree that needs to compute the key of end node of these strings
-    # for iteration process   
-    stack = []
-    key_stack = []
-    children_stack = []
- 
+    
     
 ######################################################################################## Searching code ##############################################################################################################
 
