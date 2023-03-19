@@ -37,7 +37,6 @@ def process_leaf_and_internal_nodes(tree):
                                           
             else:
                 setattr(current_node, "OT_indexes", [])
-                setattr(current_node, "base_suffixes", [])  
                 # alongside processing
                 if current_node.is_leaf():
                     #tree.temp_leaf[tree._edgeLabel(current_node, tree.root)]
