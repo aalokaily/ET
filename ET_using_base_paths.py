@@ -80,12 +80,7 @@ def process_leaf_and_internal_nodes(tree):
     print ("Processing leaf and internal nodes took", round((time.time() - start), 5), "seconds")
     
     
-    #Collect strings under leaf nodes in OSHR tree that needs to compute the key of end node of these strings
-    # for iteration process   
-    stack = []
-    key_stack = []
-    children_stack = []
-    
+      
 def Build_OT_index(tree):
 
     def phase_1_for_OT_indexing_of_base_paths(tree):
