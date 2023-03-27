@@ -191,36 +191,37 @@ def Build_OT_index(tree):
                    
             else:
                 # collect bottom-base nodes that are OSHR leave nodes
-                OSHR_leaf_nodes = []
-                if hasattr(current_node, "index_of_leftmost_OSHR_leaf"):
-                    OSHR_leaf_nodes = tree.OSHR_leaf_nodes_left_to_right_list[current_node.index_of_leftmost_OSHR_leaf:current_node.index_of_rightmost_OSHR_leaf + 1]
-                
-                # collect bottom-base nodes collected from reference nodes if current_node is inbetween_top_base_node 
-                inbetween_bottom_base_node_dict = defaultdict()  # this dict will be used to distinct nodes under tow difference reference nodes that are linking to the same node under current_node                   
-                inbetween_bottom_base_node_list = []
-                if hasattr(current_node, "inbetween_top_base_node"):
-                    if hasattr(current_node, "nodes_link_to_me"):
-                        inbetween_bottom_base_node_dict = defaultdict()  # this dict will be used to distinct nodes under tow difference reference nodes that are linking to the same node under current_node                   
-                        for reference_node in  current_node.inbetween_top_base_node:
-                            inbetween_bottom_base_node_dict[reference_node._suffix_link] = reference_node._suffix_link
-                            if hasattr(reference_node, "index_of_leftmost_OSHR_leaf"):
-                                for node in tree.OSHR_leaf_nodes_left_to_right_list[reference_node.index_of_leftmost_OSHR_leaf:reference_node.index_of_rightmost_OSHR_leaf + 1]:
-                                    inbetween_bottom_base_node_dict[node._suffix_link] = node._suffix_link
-                            if hasattr(reference_node, "index_of_leftmost_OSHR_internal"):
-                                for node in  tree.OSHR_internal_nodes_left_to_right_list[reference_node.index_of_leftmost_OSHR_internal:reference_node.index_of_rightmost_OSHR_internal + 1]:
-                                    inbetween_bottom_base_node_dict[node._suffix_link] = node._suffix_link
-                    else:
-                        if hasattr(current_node, "index_of_leftmost_OSHR_internal"):
-                            inbetween_bottom_base_node_list  = tree.OSHR_internal_nodes_left_to_right_list[current_node.index_of_leftmost_OSHR_internal:current_node.index_of_rightmost_OSHR_internal + 1]
+                if current_node != tree.root:
+                    OSHR_leaf_nodes = []
+                    if hasattr(current_node, "index_of_leftmost_OSHR_leaf"):
+                        OSHR_leaf_nodes = tree.OSHR_leaf_nodes_left_to_right_list[current_node.index_of_leftmost_OSHR_leaf:current_node.index_of_rightmost_OSHR_leaf + 1]
                     
-                # the following 6 lines cover a special case and for the root only. The suffix-link of child internal node of a root usually link to the root. In case not, 
-                # then the node that the child internal node link to must be bottom-node for the root node.
-                root_bottom_nodes = []
-                if current_node == tree.root:
-                    for node in current_node.transition_links.values():
-                        if not node.is_leaf():
-                            if node._suffix_link != tree.root:
-                                root_bottom_nodes.append(node._suffix_link)
+                    # collect bottom-base nodes collected from reference nodes if current_node is inbetween_top_base_node 
+                    inbetween_bottom_base_node_dict = defaultdict()  # this dict will be used to distinct nodes under tow difference reference nodes that are linking to the same node under current_node                   
+                    inbetween_bottom_base_node_list = []
+                    if hasattr(current_node, "inbetween_top_base_node"):
+                        if hasattr(current_node, "nodes_link_to_me"):
+                            inbetween_bottom_base_node_dict = defaultdict()  # this dict will be used to distinct nodes under tow difference reference nodes that are linking to the same node under current_node                   
+                            for reference_node in  current_node.inbetween_top_base_node:
+                                inbetween_bottom_base_node_dict[reference_node._suffix_link] = reference_node._suffix_link
+                                if hasattr(reference_node, "index_of_leftmost_OSHR_leaf"):
+                                    for node in tree.OSHR_leaf_nodes_left_to_right_list[reference_node.index_of_leftmost_OSHR_leaf:reference_node.index_of_rightmost_OSHR_leaf + 1]:
+                                        inbetween_bottom_base_node_dict[node._suffix_link] = node._suffix_link
+                                if hasattr(reference_node, "index_of_leftmost_OSHR_internal"):
+                                    for node in  tree.OSHR_internal_nodes_left_to_right_list[reference_node.index_of_leftmost_OSHR_internal:reference_node.index_of_rightmost_OSHR_internal + 1]:
+                                        inbetween_bottom_base_node_dict[node._suffix_link] = node._suffix_link
+                        else:
+                            if hasattr(current_node, "index_of_leftmost_OSHR_internal"):
+                                inbetween_bottom_base_node_list  = tree.OSHR_internal_nodes_left_to_right_list[current_node.index_of_leftmost_OSHR_internal:current_node.index_of_rightmost_OSHR_internal + 1]
+                        
+                    # the following 6 lines cover a special case and for the root only. The suffix-link of child internal node of a root usually link to the root. In case not, 
+                    # then the node that the child internal node link to must be bottom-node for the root node.
+                    root_bottom_nodes = []
+                    if current_node == tree.root:
+                        for node in current_node.transition_links.values():
+                            if not node.is_leaf():
+                                if node._suffix_link != tree.root:
+                                    root_bottom_nodes.append(node._suffix_link)
 
 
                 for bottom_base_node in list(inbetween_bottom_base_node_dict.values()) + OSHR_leaf_nodes + inbetween_bottom_base_node_list + root_bottom_nodes:
