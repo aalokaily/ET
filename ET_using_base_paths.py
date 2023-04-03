@@ -210,7 +210,6 @@ def Build_OT_index(tree):
                     # collect bottom-base nodes collected from reference nodes if current_node is inbetween_top_base_node 
                     if hasattr(current_node, "inbetween_top_base_node"):
                         if hasattr(current_node, "nodes_link_to_me"):
-                            inbetween_bottom_base_node_dict = defaultdict()  # this dict will be used to distinct nodes under tow difference reference nodes that are linking to the same node under current_node                   
                             for reference_node in  current_node.inbetween_top_base_node:
                                 inbetween_bottom_base_node_dict[reference_node._suffix_link] = reference_node._suffix_link
                                 if hasattr(reference_node, "index_of_leftmost_OSHR_leaf"):
