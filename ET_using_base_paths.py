@@ -198,7 +198,7 @@ def Build_OT_index(tree):
                     
                     # collect bottom-base nodes collected from reference nodes if current_node is inbetween_top_base_node 
                     inbetween_bottom_base_node_dict = defaultdict()  # this dict will be used to distinct nodes under tow difference reference nodes that are linking to the same node under current_node                   
-                    inbetween_bottom_base_node_list = []
+                    OSHR_internal_nodes = []
                     if hasattr(current_node, "inbetween_top_base_node"):
                         if hasattr(current_node, "nodes_link_to_me"):
                             inbetween_bottom_base_node_dict = defaultdict()  # this dict will be used to distinct nodes under tow difference reference nodes that are linking to the same node under current_node                   
@@ -212,7 +212,7 @@ def Build_OT_index(tree):
                                         inbetween_bottom_base_node_dict[node._suffix_link] = node._suffix_link
                         else:
                             if hasattr(current_node, "index_of_leftmost_OSHR_internal"):
-                                inbetween_bottom_base_node_list  = tree.OSHR_internal_nodes_left_to_right_list[current_node.index_of_leftmost_OSHR_internal:current_node.index_of_rightmost_OSHR_internal + 1]
+                                OSHR_internal_nodes  = tree.OSHR_internal_nodes_left_to_right_list[current_node.index_of_leftmost_OSHR_internal:current_node.index_of_rightmost_OSHR_internal + 1]
                         
                     # the following 6 lines cover a special case and for the root only. The suffix-link of child internal node of a root usually link to the root. In case not, 
                     # then the node that the child internal node link to must be bottom-node for the root node.
@@ -224,7 +224,7 @@ def Build_OT_index(tree):
                                     root_bottom_nodes.append(node._suffix_link)
 
 
-                for bottom_base_node in list(inbetween_bottom_base_node_dict.values()) + OSHR_leaf_nodes + inbetween_bottom_base_node_list + root_bottom_nodes:
+                for bottom_base_node in list(inbetween_bottom_base_node_dict.values()) + OSHR_leaf_nodes + OSHR_internal_nodes + root_bottom_nodes:
                     mapping_guided_suffix = tree.left_to_right_suffix_indexes_list[bottom_base_node.key_of_leftmost_leaf]
                     suffix_starting_from_current_node = mapping_guided_suffix + current_node.depth
                     if suffix_starting_from_current_node < tree.number_leaf_nodes:
