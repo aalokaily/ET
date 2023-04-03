@@ -190,9 +190,13 @@ def Build_OT_index(tree):
                 key_stack.append(tree.OT_index_counter)  
                    
             else:
+                root_bottom_nodes = []
+                OSHR_leaf_nodes = []
+                OSHR_internal_nodes = []
+                inbetween_bottom_base_node_dict = defaultdict()  # this dict will be used to distinct nodes under tow difference reference nodes that are linking to the same node under current_node                   
+
                 # the following 6 lines cover a special case and for the root only. The suffix-link of child internal node of a root usually link to the root. In case not, 
                 # then the node that the child internal node link to must be bottom-node for the root node.
-                root_bottom_nodes = []
                 if current_node == tree.root:
                     for node in current_node.transition_links.values():
                         if not node.is_leaf():
@@ -200,13 +204,10 @@ def Build_OT_index(tree):
                                 root_bottom_nodes.append(node._suffix_link)
     
                 else:
-                    OSHR_leaf_nodes = []
                     if hasattr(current_node, "index_of_leftmost_OSHR_leaf"):
                         OSHR_leaf_nodes = tree.OSHR_leaf_nodes_left_to_right_list[current_node.index_of_leftmost_OSHR_leaf:current_node.index_of_rightmost_OSHR_leaf + 1]
                     
                     # collect bottom-base nodes collected from reference nodes if current_node is inbetween_top_base_node 
-                    inbetween_bottom_base_node_dict = defaultdict()  # this dict will be used to distinct nodes under tow difference reference nodes that are linking to the same node under current_node                   
-                    OSHR_internal_nodes = []
                     if hasattr(current_node, "inbetween_top_base_node"):
                         if hasattr(current_node, "nodes_link_to_me"):
                             inbetween_bottom_base_node_dict = defaultdict()  # this dict will be used to distinct nodes under tow difference reference nodes that are linking to the same node under current_node                   
@@ -318,7 +319,7 @@ def Build_OT_index(tree):
     phase_3_for_OT_indexing_of_base_paths(tree)
     print ("\n***** Phase 3 for building OT index for base paths finished in", round((time.time() - start), 5), "seconds")  
 
-   
+    
 ######################################################################################## Searching code ##############################################################################################################
 
 def find_approximate_matching(tree, sentinel_character, given_pattern_length, pattern, k_value_to_search_for, last_number_of_mismatches, main_node, suffixes_traversals):
