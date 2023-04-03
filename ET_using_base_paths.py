@@ -190,8 +190,16 @@ def Build_OT_index(tree):
                 key_stack.append(tree.OT_index_counter)  
                    
             else:
-                # collect bottom-base nodes that are OSHR leave nodes
-                if current_node != tree.root:
+                # the following 6 lines cover a special case and for the root only. The suffix-link of child internal node of a root usually link to the root. In case not, 
+                # then the node that the child internal node link to must be bottom-node for the root node.
+                root_bottom_nodes = []
+                if current_node == tree.root:
+                    for node in current_node.transition_links.values():
+                        if not node.is_leaf():
+                            if node._suffix_link != tree.root:
+                                root_bottom_nodes.append(node._suffix_link)
+    
+                else:
                     OSHR_leaf_nodes = []
                     if hasattr(current_node, "index_of_leftmost_OSHR_leaf"):
                         OSHR_leaf_nodes = tree.OSHR_leaf_nodes_left_to_right_list[current_node.index_of_leftmost_OSHR_leaf:current_node.index_of_rightmost_OSHR_leaf + 1]
@@ -214,16 +222,7 @@ def Build_OT_index(tree):
                             if hasattr(current_node, "index_of_leftmost_OSHR_internal"):
                                 OSHR_internal_nodes  = tree.OSHR_internal_nodes_left_to_right_list[current_node.index_of_leftmost_OSHR_internal:current_node.index_of_rightmost_OSHR_internal + 1]
                         
-                    # the following 6 lines cover a special case and for the root only. The suffix-link of child internal node of a root usually link to the root. In case not, 
-                    # then the node that the child internal node link to must be bottom-node for the root node.
-                    root_bottom_nodes = []
-                    if current_node == tree.root:
-                        for node in current_node.transition_links.values():
-                            if not node.is_leaf():
-                                if node._suffix_link != tree.root:
-                                    root_bottom_nodes.append(node._suffix_link)
-
-
+                    
                 for bottom_base_node in list(inbetween_bottom_base_node_dict.values()) + OSHR_leaf_nodes + OSHR_internal_nodes + root_bottom_nodes:
                     mapping_guided_suffix = tree.left_to_right_suffix_indexes_list[bottom_base_node.key_of_leftmost_leaf]
                     suffix_starting_from_current_node = mapping_guided_suffix + current_node.depth
@@ -319,7 +318,6 @@ def Build_OT_index(tree):
     phase_3_for_OT_indexing_of_base_paths(tree)
     print ("\n***** Phase 3 for building OT index for base paths finished in", round((time.time() - start), 5), "seconds")  
 
-    
    
 ######################################################################################## Searching code ##############################################################################################################
 
