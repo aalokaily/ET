@@ -158,7 +158,7 @@ def Build_OT_index(tree):
                             
                         cost += current_node.key_of_rightmost_leaf -  current_node.key_of_leftmost_leaf + 1
         
-        # compute the case for suffix 0 as there is previous index for index 0 
+        # compute the case for suffix 0 as there is no previous index for index 0 
         leaf_node_of_suffix_index_zero = tree.leaf_suffix_index_to_leaf_memory_list[0]                                     
         if leaf_node_of_suffix_index_zero.parent != current_node._suffix_link:
             temp = leaf_node_of_suffix_index_zero
