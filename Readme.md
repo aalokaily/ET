@@ -68,7 +68,7 @@ Length of OT index  426695
 Left and right OT index of root 0 426695
 
 ***** Phase 2 for building OT index using base suffixes finished in 0.79204 seconds
-Building OT index using base paths took 1.25245 seconds
+Building OT index using base suffixes took 1.25245 seconds
 ------------------------------------------------------------------------
 Approximate matchings for k value of  1
 ------------------------------------------------------------------------
